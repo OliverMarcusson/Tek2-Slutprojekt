@@ -2,26 +2,35 @@ import React, { useState } from 'react'
 import './App.css'
 
 function App() {
-  const [username, setUsername] = useState("Johan")
-  const [newUsername, setNewUsername] = useState("")
+  const [temperature, setTemperature] = useState(20)
+  const [humidity, setHumidity] = useState(50)
+  const [motd, setMotd] = useState("Gillar du dahri? 🐰")
+  const [newMotd, setNewMotd] = useState("")
 
-  function changeUsername() {
-    if (newUsername === "") {
-      setUsername("Johan Vinkelslip")
-      return
-    }
-    setUsername(newUsername)
+  function changeTemperature(increment) {
+    setTemperature(temperature + increment)
   }
-  
+
+  function changeHumidity(increment) {
+    setHumidity(humidity + increment)
+  }
+
   return (
     <>
-      <h1>Hello {username}</h1>
-      <form>
-        <label htmlFor="">Name
-          <input type="text" value={newUsername} onChange={e => {setNewUsername(e.target.value)}}/>
-        </label>
-      </form>
-      <button onClick={changeUsername}>Hello</button>
+      <h1>Olivers sjukt coola hemsida skriven i react</h1>
+      <h2>MOTD: {motd}</h2>
+      <span>Nuvarande temperatur: {temperature}   </span>
+      <button onClick={() => changeTemperature(1)}>+</button>
+      <button onClick={() => changeTemperature(-1)}>-</button>
+      <br />
+      <span>Nuvarande fuktighet: {humidity}%   </span>
+      <button onClick={() => changeHumidity(1)}>+</button>
+      <button onClick={() => changeHumidity(-1)}>-</button>
+      <br />
+      <label htmlFor="motd">
+        Nytt MOTD: <input type="text" name="motd" id="motd" placeholder='Hej hej' onChange={e => setNewMotd(e.target.value)}/>
+      </label>
+      <button onClick={() => setMotd(newMotd)}>Uppdatera</button>
     </>
   )
 }
